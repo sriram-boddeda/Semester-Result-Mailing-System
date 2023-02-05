@@ -6,17 +6,18 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase 
 from email import encoders 
 
-fromaddr = "sunju8sunju@gmail.com"
-toaddr = "balajiragolu786@gmail.com"
+fromaddr = "FromEmail"
+toaddr = "ToEmail"
+fromPassword = "Password"
 
 # instance of MIMEMultipart 
 msg = MIMEMultipart() 
 
 # storing the senders email address 
-msg['From'] = "sunju8sunju@gmail.com" 
+msg['From'] = fromaddr
 
 # storing the receivers email address 
-msg['To'] = "balajiragolu786@gmail.com" 
+msg['To'] = toaddr
 
 # storing the subject 
 msg['Subject'] = "Semester Result"
@@ -33,8 +34,8 @@ file1=open(path, newline='')
 read=csv.reader(file1)
 
 dic={'O':10,'S':9,'A':8,'B':7,'C':6,'D':5,'F':0,'ABSENT':0}
-roll=["16A81A05I1","16A81A05J7","16A81A05I5","16A81A05J6"]
-data={roll[0]:"addagallapavani1999@gmail.com",roll[1]:"satyasri.kaduluri98@gmail.com",roll[2]:"sriramboddeda@yahoo.in"}
+roll=["rolNum1","rolNum2","rolNum3","rolNum4"]
+data={roll[0]:"studentEmail1",roll[1]:"studentEmail2",roll[2]:"studentEmail3"}
 
 path1 = r"report_card.html"
 file = open(path1,'w')
@@ -51,7 +52,7 @@ def cals(r):
     st+="</table><p align = 'center'>CGPA : {:.1f}".format(cal/c)+"</p>"
     st += "</body></html>"
     return st
-file.write(cals("16A81A05I5"))
+file.write(cals(roll[1]))
 file.close()
 
 pdfkit.from_file('report_card.html', 'out.pdf') 
@@ -80,7 +81,7 @@ s = smtplib.SMTP('smtp.gmail.com', 587)
 s.starttls() 
 
 # Authentication 
-s.login(fromaddr, "@Divya786") 
+s.login(fromaddr, fromPassword) 
 
 # Converts the Multipart msg into a string 
 text = msg.as_string() 
